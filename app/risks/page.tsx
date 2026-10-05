@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import risksData from "@/data/risks.json";
 
 type ChecklistItem = { id: string; text: string };
@@ -15,10 +16,21 @@ type Scenario = {
 
 const SCENARIOS = risksData as Scenario[];
 
-export default function RisksPage() {
+function RisksContent() {
+  const searchParams = useSearchParams();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [done, setDone] = useState<Record<string, string[]>>({});
   const [openFaq, setOpenFaq] = useState<Record<string, number>>({});
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      const scene = searchParams.get("scene");
+      if (scene && SCENARIOS.some((item) => item.id === scene)) {
+        setSelectedId(scene);
+      }
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [searchParams]);
 
   const selected = SCENARIOS.find((s) => s.id === selectedId) ?? null;
 
@@ -203,5 +215,13 @@ export default function RisksPage() {
         ))}
       </div>
     </div>
+  );
+}
+
+export default function RisksPage() {
+  return (
+    <Suspense fallback={null}>
+      <RisksContent />
+    </Suspense>
   );
 }

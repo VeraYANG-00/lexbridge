@@ -1,7 +1,9 @@
 "use client";
 
-import { useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import regulationsData from "@/data/regulations.json";
+import { useJurisdiction } from "@/lib/jurisdiction";
 
 type Regulation = {
   id: string;
@@ -19,20 +21,46 @@ const REGULATIONS = regulationsData as Regulation[];
 const JURISDICTIONS = ["中国", "美国", "欧盟"];
 const TOPICS = ["劳动法", "数据合规", "知识产权"];
 
-export default function RegulationsPage() {
-  const [jurisdiction, setJurisdiction] = useState("全部");
+function RegulationsContent() {
+  const [userJurisdiction, setUserJurisdiction] = useState<string | null>(null);
   const [topic, setTopic] = useState("全部");
   const [selected, setSelected] = useState<Regulation | null>(null);
+  const [keyword, setKeyword] = useState("");
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q");
+  const { jurisdiction: globalJurisdiction, hydrated } = useJurisdiction();
 
-  const filtered = useMemo(
-    () =>
-      REGULATIONS.filter(
-        (item) =>
-          (jurisdiction === "全部" || item.jurisdiction === jurisdiction) &&
-          (topic === "全部" || item.topic === topic)
-      ),
-    [jurisdiction, topic]
-  );
+  useEffect(() => {
+    if (!initialQ) return;
+    const timer = setTimeout(() => {
+      setKeyword(initialQ);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [initialQ]);
+
+  const jurisdiction =
+    userJurisdiction ??
+    (hydrated
+      ? globalJurisdiction === "US"
+        ? "US"
+        : globalJurisdiction === "UK"
+          ? "EU"
+          : "全部"
+      : "全部");
+
+  const filtered = useMemo(() => {
+    const kw = keyword.trim().toLowerCase();
+    return REGULATIONS.filter(
+      (item) =>
+        (jurisdiction === "全部" || item.jurisdiction === jurisdiction) &&
+        (topic === "全部" || item.topic === topic) &&
+        (!kw ||
+          item.title.toLowerCase().includes(kw) ||
+          item.titleEn.toLowerCase().includes(kw) ||
+          item.summary.toLowerCase().includes(kw) ||
+          item.summaryEn.toLowerCase().includes(kw))
+    );
+  }, [jurisdiction, topic, keyword]);
 
   function filterButtonStyle(active: boolean): string {
     return (
@@ -48,13 +76,21 @@ export default function RegulationsPage() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">法规库</h1>
         <p className="mt-1 text-sm text-gray-500">
-          按法域与主题浏览法规，点击条目查看中英对照详情（当前为示例数据，暂未接入外部数据源）。
+          按法域、主题与关键词浏览法规，点击条目查看中英对照详情（当前为示例数据，暂未接入外部数据源）。
         </p>
       </div>
 
       <div className="flex flex-col gap-6 lg:flex-row">
         <aside className="shrink-0 lg:w-52">
           <div className="rounded-lg border border-gray-200 p-4">
+            <input
+              value={keyword}
+              onChange={(event) => setKeyword(event.target.value)}
+              placeholder="搜索标题或摘要关键词"
+              aria-label="关键词"
+              className="h-10 w-full rounded-md border border-gray-300 px-3 text-sm outline-none transition-colors placeholder:text-gray-400 focus:border-primary focus:ring-2 focus:ring-primary/20"
+            />
+
             <h2 className="text-xs font-semibold uppercase tracking-wide text-gray-400">
               法域
             </h2>
@@ -63,7 +99,7 @@ export default function RegulationsPage() {
                 <button
                   key={item}
                   type="button"
-                  onClick={() => setJurisdiction(item)}
+                  onClick={() => setUserJurisdiction(item)}
                   className={filterButtonStyle(jurisdiction === item)}
                 >
                   {item}
@@ -86,6 +122,12 @@ export default function RegulationsPage() {
                 </button>
               ))}
             </div>
+
+            {hydrated && globalJurisdiction === "UK" && (
+              <p className="mt-4 text-xs leading-5 text-gray-400">
+                当前法域为 UK，示例数据未收录英国条目，默认按 EU 筛选。
+              </p>
+            )}
           </div>
         </aside>
 
@@ -194,5 +236,12 @@ export default function RegulationsPage() {
         </div>
       )}
     </div>
+  );
+}
+export default function RegulationsPage() {
+  return (
+    <Suspense fallback={null}>
+      <RegulationsContent />
+    </Suspense>
   );
 }

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useState } from "react";
+import { Suspense, useEffect, useMemo, useState } from "react";
+import { useSearchParams } from "next/navigation";
 import { QA_CATEGORIES, type QuestionCard } from "@/lib/qa";
 import { getSupabase } from "@/lib/supabase";
 
@@ -16,11 +17,21 @@ function formatTime(iso: string): string {
   return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}`;
 }
 
-export default function QaPage() {
+function QaContent() {
   const [state, setState] = useState<LoadState>({ status: "loading" });
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("全部");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q");
+
+  useEffect(() => {
+    if (!initialQ) return;
+    const timer = setTimeout(() => {
+      setSearch(initialQ);
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [initialQ]);
 
   useEffect(() => {
     let cancelled = false;
@@ -232,5 +243,12 @@ export default function QaPage() {
           </div>
         ))}
     </div>
+  );
+}
+export default function QaPage() {
+  return (
+    <Suspense fallback={null}>
+      <QaContent />
+    </Suspense>
   );
 }

@@ -1,18 +1,33 @@
 "use client";
 
+import { usePathname, useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { useJurisdiction, type Jurisdiction } from "@/lib/jurisdiction";
 
-const SCENES = ["出海", "劳动", "合规"];
-
-const JURISDICTIONS = [
+const JURISDICTIONS: { code: Jurisdiction; label: string }[] = [
   { code: "US", label: "美国" },
   { code: "UK", label: "英国" },
 ];
 
+const SCENES = [
+  { label: "出海", href: "/", isActive: (p: string) => p === "/" },
+  {
+    label: "劳动",
+    href: "/risks?scene=labor",
+    isActive: (p: string) => p.startsWith("/risks"),
+  },
+  {
+    label: "合规",
+    href: "/regulations",
+    isActive: (p: string) => p.startsWith("/regulations"),
+  },
+];
+
 export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
-  const [jurisdiction, setJurisdiction] = useState("US");
+  const router = useRouter();
+  const pathname = usePathname();
+  const { jurisdiction, setJurisdiction } = useJurisdiction();
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scene, setScene] = useState("出海");
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -24,6 +39,16 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
     document.addEventListener("mousedown", handleOutsideClick);
     return () => document.removeEventListener("mousedown", handleOutsideClick);
   }, []);
+
+  function handleSceneClick(href: string) {
+    const current =
+      typeof window !== "undefined"
+        ? window.location.pathname + window.location.search
+        : pathname;
+    if (href !== current) {
+      router.push(href);
+    }
+  }
 
   return (
     <header className="sticky top-0 z-40 flex h-14 shrink-0 items-center justify-between border-b border-gray-200 bg-white px-4 sm:px-6">
@@ -87,21 +112,25 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
         </div>
 
         <nav className="flex items-center gap-1">
-          {SCENES.map((item) => (
-            <button
-              key={item}
-              type="button"
-              onClick={() => setScene(item)}
-              className={
-                "rounded-full px-2.5 py-1 text-xs transition-colors sm:px-3 " +
-                (item === scene
-                  ? "bg-primary text-white"
-                  : "text-gray-600 hover:bg-gray-100 hover:text-primary")
-              }
-            >
-              {item}
-            </button>
-          ))}
+          {SCENES.map((scene) => {
+            const active = scene.isActive(pathname);
+            return (
+              <button
+                key={scene.label}
+                type="button"
+                onClick={() => handleSceneClick(scene.href)}
+                aria-current={active ? "page" : undefined}
+                className={
+                  "rounded-full px-2.5 py-1 text-xs transition-colors sm:px-3 " +
+                  (active
+                    ? "bg-primary text-white"
+                    : "text-gray-600 hover:bg-gray-100 hover:text-primary")
+                }
+              >
+                {scene.label}
+              </button>
+            );
+          })}
         </nav>
       </div>
     </header>

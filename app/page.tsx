@@ -1,17 +1,18 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 const QUICK_QUESTIONS = ["出海用工", "数据合规", "知识产权"];
 
 export default function HomePage() {
+  const router = useRouter();
   const [keyword, setKeyword] = useState("");
 
   function handleSearch(term?: string) {
     const query = (term ?? keyword).trim();
     if (!query) return;
-    // TODO: 接入真实搜索
-    console.log("[首页搜索]", query);
+    router.push(`/search?q=${encodeURIComponent(query)}`);
   }
 
   return (
@@ -46,10 +47,7 @@ export default function HomePage() {
           <button
             key={question}
             type="button"
-            onClick={() => {
-              setKeyword(question);
-              handleSearch(question);
-            }}
+            onClick={() => handleSearch(question)}
             className="rounded-full border border-gray-200 px-3.5 py-1.5 text-sm text-gray-600 transition-colors hover:border-primary hover:text-primary"
           >
             {question}

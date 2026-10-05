@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { Suspense, useCallback, useEffect, useState } from "react";
+import { useSearchParams } from "next/navigation";
+import { useJurisdiction } from "@/lib/jurisdiction";
 
 type CaseResult = {
   caseName: string;
@@ -27,19 +29,23 @@ const COURT_OPTIONS = [
 
 const CURRENT_YEAR = new Date().getFullYear();
 
-export default function CasesPage() {
+function CasesContent() {
   const [keyword, setKeyword] = useState("");
   const [court, setCourt] = useState("");
   const [filedAfter, setFiledAfter] = useState("");
   const [filedBefore, setFiledBefore] = useState("");
   const [state, setState] = useState<SearchState>({ status: "idle" });
+  const { jurisdiction, hydrated } = useJurisdiction();
 
-  async function runSearch(
+  const searchParams = useSearchParams();
+  const initialQ = searchParams.get("q");
+
+  const runSearch = useCallback(async (
     query: string,
     courtValue: string,
     after: string,
     before: string
-  ) {
+  ) => {
     if (!query.trim()) {
       setState({ status: "error", message: "请输入搜索关键词" });
       return;
@@ -74,7 +80,16 @@ export default function CasesPage() {
         message: error instanceof Error ? error.message : "未知错误",
       });
     }
-  }
+  }, []);
+
+  useEffect(() => {
+    if (!initialQ) return;
+    const timer = setTimeout(() => {
+      setKeyword(initialQ);
+      void runSearch(initialQ, "", "", "");
+    }, 0);
+    return () => clearTimeout(timer);
+  }, [initialQ, runSearch]);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -89,6 +104,21 @@ export default function CasesPage() {
           基于 CourtListener 的美国判例库，支持按关键词、法院与立案年份筛选。
         </p>
       </div>
+
+      {hydrated && (
+        <div
+          className={
+            "rounded-md border px-4 py-2.5 text-sm " +
+            (jurisdiction === "US"
+              ? "border-gray-200 bg-gray-50 text-gray-500"
+              : "border-amber-200 bg-amber-50 text-amber-700")
+          }
+        >
+          {jurisdiction === "US"
+            ? "当前法域 US：检索结果来自 CourtListener 美国判例库。"
+            : "当前法域 UK：判例库目前仅覆盖美国判例，检索结果仍为美国判例。"}
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} className="rounded-lg border border-gray-200 p-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">
@@ -199,5 +229,12 @@ export default function CasesPage() {
         </div>
       )}
     </div>
+  );
+}
+export default function CasesPage() {
+  return (
+    <Suspense fallback={null}>
+      <CasesContent />
+    </Suspense>
   );
 }

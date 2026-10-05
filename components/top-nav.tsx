@@ -38,7 +38,10 @@ export default function TopNav({ onMenuClick }: { onMenuClick: () => void }) {
             <path strokeLinecap="round" d="M3 5h14M3 10h14M3 15h14" />
           </svg>
         </button>
-        <span className="text-lg font-semibold tracking-wide text-primary">出海法务助手</span>
+        <span className="flex items-baseline gap-2">
+          <span className="text-lg font-semibold tracking-wide text-primary">LexBridge</span>
+          <span className="hidden text-xs text-gray-400 sm:inline">出海判例智搜平台</span>
+        </span>
       </div>
 
       <div className="flex items-center gap-2 sm:gap-3">

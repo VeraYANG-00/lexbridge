@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "出海法务助手",
-  description: "面向出海企业的智能法务助手",
+  title: "LexBridge · 出海判例智搜平台",
+  description: "面向出海企业的判例检索与合规风险平台",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

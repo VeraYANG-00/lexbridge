@@ -1,0 +1,92 @@
+[
+  {
+    "id": "cn-labor-contract",
+    "title": "中华人民共和国劳动合同法",
+    "titleEn": "Labor Contract Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "劳动法",
+    "effectiveDate": "2008-01-01",
+    "summary": "确立劳动合同的订立、履行、变更、解除和终止制度，规定书面劳动合同义务、经济补偿规则以及女职工和未成年工的特殊保护，是外资企业在中国用工合规的基础性依据。",
+    "summaryEn": "Establishes the framework for concluding, performing, modifying, dissolving and terminating labor contracts in China, including the requirement of written contracts, economic compensation rules and special protections for female and juvenile workers — the core basis for employment compliance in China."
+  },
+  {
+    "id": "cn-pipl",
+    "title": "中华人民共和国个人信息保护法",
+    "titleEn": "Personal Information Protection Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "数据合规",
+    "effectiveDate": "2021-11-01",
+    "summary": "系统规定个人信息处理规则、敏感个人信息处理、个人信息跨境提供（安全评估、保护认证、标准合同）以及个人权利，是中国数据出境与在华经营数据合规的主要法律依据之一。",
+    "summaryEn": "China's comprehensive personal information protection law, regulating personal information processing, sensitive categories, cross-border transfers (security assessment, certification, standard contracts) and individual rights — a key baseline for cross-border data compliance."
+  },
+  {
+    "id": "cn-patent",
+    "title": "中华人民共和国专利法",
+    "titleEn": "Patent Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "知识产权",
+    "effectiveDate": "2021-06-01",
+    "summary": "规定发明、实用新型和外观设计专利的授权程序、权利保护范围、侵权判定与救济，并引入惩罚性赔偿制度，是外企在华保护研发成果与品牌资产的基本法律。",
+    "summaryEn": "China's patent statute covering invention, utility model and design patents, examination, infringement remedies and punitive damages — the foundation for protecting R&D and brand assets in China."
+  },
+  {
+    "id": "us-nlra",
+    "title": "国家劳动关系法（NLRA）",
+    "titleEn": "National Labor Relations Act (NLRA)",
+    "jurisdiction": "美国",
+    "topic": "劳动法",
+    "effectiveDate": "1935-07-05",
+    "summary": "保护私营部门员工组织工会、加入工会并进行集体谈判的权利，界定不公平劳动行为，由美国国家劳动关系委员会（NLRB）负责执法，是美国用工合规必须了解的核心框架。",
+    "summaryEn": "Protects private-sector employees' rights to organize, join unions and bargain collectively, defining unfair labor practices enforced by the NLRB — a core framework for US employment compliance."
+  },
+  {
+    "id": "us-ccpa",
+    "title": "加州消费者隐私法（CCPA）",
+    "titleEn": "California Consumer Privacy Act (CCPA)",
+    "jurisdiction": "美国",
+    "topic": "数据合规",
+    "effectiveDate": "2020-01-01",
+    "summary": "赋予加州居民知情、删除与拒绝出售个人信息的权利，要求企业履行告知义务并管理供应商合同；经 CPRA 修订后成为美国最严格州级隐私制度之一，对业务覆盖加州的企业具有域外适用性。",
+    "summaryEn": "Grants California residents rights to know, delete and opt out of the sale of personal information, with notice and vendor-contract duties for businesses — among the strictest US state privacy regimes after the CPRA amendments."
+  },
+  {
+    "id": "us-lanham",
+    "title": "兰哈姆法（商标法）",
+    "titleEn": "Lanham Act (Trademark Act)",
+    "jurisdiction": "美国",
+    "topic": "知识产权",
+    "effectiveDate": "1946-07-05",
+    "summary": "美国联邦商标基本法，规定 USPTO 商标注册制度、基于使用的权利取得以及商标侵权与虚假宣传的救济途径，是品牌进入美国市场与打假维权的基础法律依据。",
+    "summaryEn": "The US federal trademark statute: USPTO registration, use-based rights, and remedies for infringement and false advertising — the foundation for brand entry into and enforcement in the US market."
+  },
+  {
+    "id": "eu-gdpr",
+    "title": "通用数据保护条例（GDPR）",
+    "titleEn": "General Data Protection Regulation (GDPR)",
+    "jurisdiction": "欧盟",
+    "topic": "数据合规",
+    "effectiveDate": "2018-05-25",
+    "summary": "欧盟个人数据保护通用条例，对处理欧盟数据主体数据的域外控制者同样适用，规定合法性基础、数据主体权利、跨境传输（第五章）规则以及最高 2000 万欧元或全球营业额 4% 的罚款。",
+    "summaryEn": "The EU's comprehensive data protection regulation, extraterritorial to non-EU controllers processing EU data subjects' data, with transfer rules (Chapter V) and fines up to EUR 20m or 4% of global turnover."
+  },
+  {
+    "id": "eu-working-time",
+    "title": "工作时间指令（2003/88/EC）",
+    "titleEn": "Working Time Directive (2003/88/EC)",
+    "jurisdiction": "欧盟",
+    "topic": "劳动法",
+    "effectiveDate": "2003-11-04",
+    "summary": "规定每周工作时间上限 48 小时（成员国可允许放弃超额保护）、每年至少 20 天带薪年假、每日每周休息以及夜班和轮班规则，需由各成员国转化为国内法实施。",
+    "summaryEn": "Sets a 48-hour maximum working week (with member-state opt-out), 20 days' minimum paid annual leave, daily/weekly rest and night/shift work rules, to be transposed into member-state law."
+  },
+  {
+    "id": "eu-eutmr",
+    "title": "欧盟商标条例（EUTMR）",
+    "titleEn": "European Union Trade Mark Regulation (Regulation (EU) 2017/1001)",
+    "jurisdiction": "欧盟",
+    "topic": "知识产权",
+    "effectiveDate": "2017-09-12",
+    "summary": "规定欧盟商标（EUTM）的统一注册制度，一次注册在全部成员国生效，并规定权利取得、异议程序与执法机制，是品牌在欧洲统一布局与保护的关键法律工具。",
+    "summaryEn": "Establishes the EU trade mark system: a single EUIPO registration valid across all member states, with opposition and enforcement procedures — the key instrument for pan-European brand protection."
+  }
+]

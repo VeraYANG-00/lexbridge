@@ -5,7 +5,7 @@ import { usePathname } from "next/navigation";
 
 const NAV_ITEMS = [
   { label: "首页", href: "/" },
-  { label: "AI问答", href: "/qa" },
+  { label: "问题库", href: "/qa" },
   { label: "判例检索", href: "/cases" },
   { label: "法规库", href: "/regulations" },
   { label: "风险场景", href: "/risks" },
@@ -52,7 +52,7 @@ export default function Sidebar({ open, onClose }: { open: boolean; onClose: () 
           <div className="absolute inset-0 bg-gray-900/40" onClick={onClose} aria-hidden="true" />
           <aside className="absolute bottom-0 left-0 top-0 w-64 bg-white shadow-xl">
             <div className="flex h-14 items-center justify-between border-b border-gray-200 px-4">
-              <span className="text-base font-semibold text-primary">出海法务助手</span>
+              <span className="text-base font-semibold text-primary">LexBridge</span>
               <button
                 type="button"
                 onClick={onClose}

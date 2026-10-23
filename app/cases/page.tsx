@@ -2,7 +2,6 @@
 
 import { Suspense, useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { useJurisdiction } from "@/lib/jurisdiction";
 
 type CaseResult = {
   caseName: string;
@@ -35,7 +34,6 @@ function CasesContent() {
   const [filedAfter, setFiledAfter] = useState("");
   const [filedBefore, setFiledBefore] = useState("");
   const [state, setState] = useState<SearchState>({ status: "idle" });
-  const { jurisdiction, hydrated } = useJurisdiction();
 
   const searchParams = useSearchParams();
   const initialQ = searchParams.get("q");
@@ -104,21 +102,6 @@ function CasesContent() {
           基于 CourtListener 的美国判例库，支持按关键词、法院与立案年份筛选。
         </p>
       </div>
-
-      {hydrated && (
-        <div
-          className={
-            "rounded-md border px-4 py-2.5 text-sm " +
-            (jurisdiction === "US"
-              ? "border-gray-200 bg-gray-50 text-gray-500"
-              : "border-amber-200 bg-amber-50 text-amber-700")
-          }
-        >
-          {jurisdiction === "US"
-            ? "当前法域 US：检索结果来自 CourtListener 美国判例库。"
-            : "当前法域 UK：判例库目前仅覆盖美国判例，检索结果仍为美国判例。"}
-        </div>
-      )}
 
       <form onSubmit={handleSubmit} className="rounded-lg border border-gray-200 p-4">
         <div className="flex flex-col gap-3 lg:flex-row lg:items-center">

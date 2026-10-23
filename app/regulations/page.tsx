@@ -3,7 +3,6 @@
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
 import regulationsData from "@/data/regulations.json";
-import { useJurisdiction } from "@/lib/jurisdiction";
 
 type Regulation = {
   id: string;
@@ -14,21 +13,21 @@ type Regulation = {
   effectiveDate: string;
   summary: string;
   summaryEn: string;
+  source: string;
 };
 
 const REGULATIONS = regulationsData as Regulation[];
 
-const JURISDICTIONS = ["中国", "美国", "欧盟"];
-const TOPICS = ["劳动法", "数据合规", "知识产权"];
+const JURISDICTIONS = ["中国", "美国", "香港", "欧盟"];
+const TOPICS = ["劳动", "数据合规", "知识产权", "公司治理", "合规监管"];
 
 function RegulationsContent() {
-  const [userJurisdiction, setUserJurisdiction] = useState<string | null>(null);
+  const [jurisdiction, setJurisdiction] = useState("全部");
   const [topic, setTopic] = useState("全部");
   const [selected, setSelected] = useState<Regulation | null>(null);
   const [keyword, setKeyword] = useState("");
   const searchParams = useSearchParams();
   const initialQ = searchParams.get("q");
-  const { jurisdiction: globalJurisdiction, hydrated } = useJurisdiction();
 
   useEffect(() => {
     if (!initialQ) return;
@@ -37,16 +36,6 @@ function RegulationsContent() {
     }, 0);
     return () => clearTimeout(timer);
   }, [initialQ]);
-
-  const jurisdiction =
-    userJurisdiction ??
-    (hydrated
-      ? globalJurisdiction === "US"
-        ? "US"
-        : globalJurisdiction === "UK"
-          ? "EU"
-          : "全部"
-      : "全部");
 
   const filtered = useMemo(() => {
     const kw = keyword.trim().toLowerCase();
@@ -76,7 +65,7 @@ function RegulationsContent() {
       <div>
         <h1 className="text-2xl font-semibold text-gray-900">法规库</h1>
         <p className="mt-1 text-sm text-gray-500">
-          按法域、主题与关键词浏览法规，点击条目查看中英对照详情（当前为示例数据，暂未接入外部数据源）。
+          按法域、主题与关键词浏览出海重点法规，点击条目查看中英对照详情与官方来源。
         </p>
       </div>
 
@@ -99,7 +88,7 @@ function RegulationsContent() {
                 <button
                   key={item}
                   type="button"
-                  onClick={() => setUserJurisdiction(item)}
+                  onClick={() => setJurisdiction(item)}
                   className={filterButtonStyle(jurisdiction === item)}
                 >
                   {item}
@@ -123,16 +112,11 @@ function RegulationsContent() {
               ))}
             </div>
 
-            {hydrated && globalJurisdiction === "UK" && (
-              <p className="mt-4 text-xs leading-5 text-gray-400">
-                当前法域为 UK，示例数据未收录英国条目，默认按 EU 筛选。
-              </p>
-            )}
           </div>
         </aside>
 
         <div className="min-w-0 flex-1">
-          <p className="text-sm text-gray-500">共 {filtered.length} 条法规</p>
+          <p className="text-sm text-gray-500">共 {filtered.length} 部法规</p>
 
           {filtered.length === 0 ? (
             <p className="mt-3 rounded-lg border border-gray-200 px-4 py-10 text-center text-sm text-gray-400">
@@ -172,6 +156,10 @@ function RegulationsContent() {
         </div>
       </div>
 
+      <p className="text-xs leading-5 text-gray-400">
+        内容仅供参考，具体以官方原文为准；不构成法律意见。
+      </p>
+
       {selected && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div
@@ -207,6 +195,16 @@ function RegulationsContent() {
               <span className="text-xs text-gray-400">
                 生效 {selected.effectiveDate}
               </span>
+              {selected.source && (
+                <a
+                  href={selected.source}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-xs font-medium text-primary hover:underline"
+                >
+                  官方来源 →
+                </a>
+              )}
             </div>
 
             <h2 className="mt-3 pr-10 text-xl font-semibold text-gray-900">

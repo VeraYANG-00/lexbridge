@@ -156,7 +156,7 @@ function SearchContent() {
           all.filter(
             (item) =>
               item.question.toLowerCase().includes(keyword) ||
-              item.answer.toLowerCase().includes(keyword)
+              (item.answer ?? "").toLowerCase().includes(keyword)
           )
         );
       } catch (err) {

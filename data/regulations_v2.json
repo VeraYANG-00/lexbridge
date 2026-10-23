@@ -1,0 +1,222 @@
+[
+  {
+    "id": "cn-labor-lcl",
+    "title": "中华人民共和国劳动合同法",
+    "titleEn": "Labor Contract Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "劳动",
+    "effectiveDate": "2013-07-01（2012年修正）",
+    "summary": "规范用人单位与劳动者订立、履行、变更、解除和终止劳动合同的行为，明确书面合同、试用期、经济补偿、竞业限制等规则。中国企业境内用工及向境外派驻前的劳动关系安排均需遵守。",
+    "summaryEn": "Governs the formation, performance, modification and termination of employment contracts in China, covering written contracts, probation, severance and non-compete rules.",
+    "source": "https://flk.npc.gov.cn/"
+  },
+  {
+    "id": "cn-data-pipl",
+    "title": "中华人民共和国个人信息保护法",
+    "titleEn": "Personal Information Protection Law of the PRC",
+    "jurisdiction": "中国",
+    "topic": "数据合规",
+    "effectiveDate": "2021-11-01",
+    "summary": "规定个人信息处理规则、个人权利、跨境提供规则和处理者义务，对敏感个人信息及向境外提供数据设定严格条件。中国企业向境外关联方传输员工或客户个人信息时，需履行告知同意、安全评估或标准合同等程序。",
+    "summaryEn": "Sets rules for processing personal information, individual rights, cross-border transfer and processor obligations, with strict conditions for sensitive data and outbound transfers.",
+    "source": "https://flk.npc.gov.cn/"
+  },
+  {
+    "id": "cn-ip-patent",
+    "title": "中华人民共和国专利法",
+    "titleEn": "Patent Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "知识产权",
+    "effectiveDate": "2021-06-01（2020年修正）",
+    "summary": "规定发明、实用新型、外观设计的授权条件、申请程序与保护期限。2020年修正引入惩罚性赔偿（最高五倍）和药品专利期限补偿。出海企业应提前在目标市场布局专利并做侵权风险评估。",
+    "summaryEn": "Sets patentability, filing procedures and terms for inventions, utility models and designs, introducing punitive damages and pharmaceutical patent term extension in the 2020 revision.",
+    "source": "https://flk.npc.gov.cn/"
+  },
+  {
+    "id": "cn-corp-companylaw",
+    "title": "中华人民共和国公司法",
+    "titleEn": "Company Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "公司治理",
+    "effectiveDate": "2024-07-01（2023年修订）",
+    "summary": "2023年修订的新《公司法》自2024年7月1日施行，完善注册资本认缴登记、股东出资加速到期、董事忠实勤勉义务、类别股与简易减资等制度，并强化控股股东与实际控制人责任。企业搭建境外架构时，境内母公司的治理与出资安排需同步调整。",
+    "summaryEn": "The 2023 revision, effective 1 July 2024, reforms subscribed capital rules, director duties, class shares and simplified capital reduction, and strengthens controller liability.",
+    "source": "https://flk.npc.gov.cn/"
+  },
+  {
+    "id": "cn-comp-antimonopoly",
+    "title": "中华人民共和国反垄断法",
+    "titleEn": "Anti-Monopoly Law of the People's Republic of China",
+    "jurisdiction": "中国",
+    "topic": "合规监管",
+    "effectiveDate": "2022-08-01（2022年修正）",
+    "summary": "2022年修正引入经营者集中审查停钟制度、大幅提高罚款上限（最高上一年度销售额10%），并明确平台经济领域反垄断规则。中国企业境外并购或与境外平台合作时，可能同时触发中国与目标国的申报义务。",
+    "summaryEn": "The 2022 amendment introduces a stop-the-clock mechanism for merger review, raises fine ceilings and clarifies antitrust rules for platform economy.",
+    "source": "https://flk.npc.gov.cn/"
+  },
+  {
+    "id": "us-labor-flsa",
+    "title": "美国公平劳动标准法",
+    "titleEn": "Fair Labor Standards Act (FLSA)",
+    "jurisdiction": "美国",
+    "topic": "劳动",
+    "effectiveDate": "1938-06-25",
+    "summary": "规定最低工资、加班工资（一般为每周超过40小时部分的1.5倍）、童工限制和记录保存义务，并区分雇员与独立承包商。中国企业在美国用工时，承包商错误分类是高频风险点。",
+    "summaryEn": "Sets minimum wage, overtime pay, child labor limits and recordkeeping duties, and distinguishes employees from independent contractors.",
+    "source": "https://www.dol.gov/agencies/whd/flsa"
+  },
+  {
+    "id": "us-data-ccpa",
+    "title": "加州消费者隐私法（经CPRA修订）",
+    "titleEn": "California Consumer Privacy Act (as amended by CPRA)",
+    "jurisdiction": "美国",
+    "topic": "数据合规",
+    "effectiveDate": "2020-01-01（CPRA修正自2023-01-01）",
+    "summary": "赋予加州消费者知情、删除、拒绝出售或共享、更正及限制使用敏感个人信息等权利，适用于达到营收或数据处理量门槛的企业，包括境外企业。面向加州用户的中国企业需提供隐私通知、处理数据主体请求并履行与服务商的合同义务。",
+    "summaryEn": "Grants California consumers rights to know, delete, opt out of sale or sharing, correct and limit sensitive data use, applying to businesses above thresholds including foreign ones.",
+    "source": "https://oag.ca.gov/privacy/ccpa"
+  },
+  {
+    "id": "us-ip-lanham",
+    "title": "兰哈姆法（美国商标法）",
+    "titleEn": "Lanham Act (Trademark Act of 1946)",
+    "jurisdiction": "美国",
+    "topic": "知识产权",
+    "effectiveDate": "1946-07-05",
+    "summary": "美国联邦商标保护的基础法律，规定商标注册、侵权、淡化、虚假宣传及不正当竞争责任。中国品牌进入美国市场前应完成商标检索与注册，并注意使用在先原则与州法下的普通法权利。",
+    "summaryEn": "The foundation of US federal trademark protection, covering registration, infringement, dilution, false advertising and unfair competition.",
+    "source": "https://www.uspto.gov/"
+  },
+  {
+    "id": "us-corp-dgcl",
+    "title": "特拉华州普通公司法",
+    "titleEn": "Delaware General Corporation Law (DGCL)",
+    "jurisdiction": "美国",
+    "topic": "公司治理",
+    "effectiveDate": "1899年（历次修订）",
+    "summary": "特拉华州公司法，是美国最常用的公司设立法律框架，以灵活的董事会中心治理、商业判断规则和成熟的判例法著称。多数赴美融资或上市的中国企业会选择在特拉华设立控股公司。",
+    "summaryEn": "Delaware's corporation statute, the most widely used US incorporation framework, known for board-centered governance and extensive case law.",
+    "source": "https://delcode.delaware.gov/title8/c001/"
+  },
+  {
+    "id": "us-comp-fcpa",
+    "title": "美国海外反腐败法",
+    "titleEn": "Foreign Corrupt Practices Act (FCPA)",
+    "jurisdiction": "美国",
+    "topic": "合规监管",
+    "effectiveDate": "1977-12-19",
+    "summary": "禁止向外国官员行贿以获取或保持业务，并要求发行人维持账簿记录与内部控制；管辖范围可延伸至在美国境内行事的外国公司及美国公司的境外子公司。中国企业在美国上市或收购美国资产时需建立反贿赂合规体系。",
+    "summaryEn": "Prohibits bribery of foreign officials and requires issuers to maintain books, records and internal controls, with extraterritorial reach.",
+    "source": "https://www.justice.gov/criminal/criminal-fraud/foreign-corrupt-practices-act"
+  },
+  {
+    "id": "hk-labor-eo",
+    "title": "香港雇佣条例（第57章）",
+    "titleEn": "Employment Ordinance (Cap. 57)",
+    "jurisdiction": "香港",
+    "topic": "劳动",
+    "effectiveDate": "1968年",
+    "summary": "香港规范雇佣关系的基础法例，涵盖工资支付、休息日、法定假日、年假、病假、产假、遣散费与长期服务金、终止雇佣通知等。中国企业在港招聘或派驻员工时，须注意连续性合约认定与强制性公积金安排。",
+    "summaryEn": "Hong Kong's core employment statute covering wages, rest days, holidays, leave, sickness, severance, long service payment and termination notice.",
+    "source": "https://www.elegislation.gov.hk/hk/cap57"
+  },
+  {
+    "id": "hk-data-pdpo",
+    "title": "香港个人资料（私隐）条例（第486章）",
+    "titleEn": "Personal Data (Privacy) Ordinance (Cap. 486)",
+    "jurisdiction": "香港",
+    "topic": "数据合规",
+    "effectiveDate": "1996-12-20",
+    "summary": "以六项保障资料原则为核心，规范个人资料的收集、准确性、保留、使用、保安与查阅，并设有直接营销及起底相关罪行。香港公司处理由内地或海外传输而来的员工数据时，须评估跨境传输的合规路径。",
+    "summaryEn": "Built on six data protection principles, governing collection, accuracy, retention, use, security and access, with offences on direct marketing and doxxing.",
+    "source": "https://www.elegislation.gov.hk/hk/cap486"
+  },
+  {
+    "id": "hk-ip-tmo",
+    "title": "香港商标条例（第559章）",
+    "titleEn": "Trade Marks Ordinance (Cap. 559)",
+    "jurisdiction": "香港",
+    "topic": "知识产权",
+    "effectiveDate": "2003-04-04",
+    "summary": "规定商标注册、优先权、侵权与撤销等制度，采用多类别申请并扩大对驰名商标的保护。中国企业进入香港市场应尽早注册商标，并注意香港商标注册与内地注册相互独立。",
+    "summaryEn": "Governs trademark registration, priority, infringement and revocation, with multi-class applications and broader protection for well-known marks.",
+    "source": "https://www.elegislation.gov.hk/hk/cap559"
+  },
+  {
+    "id": "hk-corp-co",
+    "title": "香港公司条例（第622章）",
+    "titleEn": "Companies Ordinance (Cap. 622)",
+    "jurisdiction": "香港",
+    "topic": "公司治理",
+    "effectiveDate": "2014-03-03",
+    "summary": "香港公司法的核心法例，涵盖公司成立、股本、董事责任、账目审计、成员权利与公司清盘等，强调董事的谨慎、技巧及勤勉责任。内地企业以香港公司作为境外控股平台时，需遵守其申报与审计要求。",
+    "summaryEn": "Hong Kong's core companies statute covering incorporation, capital, directors' duties, accounts and audit, members' rights and winding up.",
+    "source": "https://www.elegislation.gov.hk/hk/cap622"
+  },
+  {
+    "id": "hk-comp-pobo",
+    "title": "香港防止贿赂条例（第201章）",
+    "titleEn": "Prevention of Bribery Ordinance (Cap. 201)",
+    "jurisdiction": "香港",
+    "topic": "合规监管",
+    "effectiveDate": "1971-05-14",
+    "summary": "禁止向公职人员及代理人提供或索取利益，并规管来历不明财产的管有，由廉政公署执行。中国企业在港经营或通过香港平台开展跨境业务时，需建立礼品、招待与第三方佣金的合规审查机制。",
+    "summaryEn": "Prohibits offering or soliciting advantages to public servants and agents, and regulates possession of unexplained property, enforced by the ICAC.",
+    "source": "https://www.elegislation.gov.hk/hk/cap201"
+  },
+  {
+    "id": "eu-labor-wtd",
+    "title": "欧盟工作时间指令",
+    "titleEn": "Working Time Directive 2003/88/EC",
+    "jurisdiction": "欧盟",
+    "topic": "劳动",
+    "effectiveDate": "2003-11-23",
+    "summary": "规定每周最高工时（含加班平均不超过48小时）、每日与每周休息、年假（至少4周）及夜班保护。中国企业在欧盟雇佣员工或派驻人员时，需按各成员国转化立法安排工时与休假。",
+    "summaryEn": "Sets maximum weekly working time (average 48 hours including overtime), daily and weekly rest, at least four weeks' annual leave and night work protection.",
+    "source": "https://eur-lex.europa.eu/eli/dir/2003/88/oj"
+  },
+  {
+    "id": "eu-data-gdpr",
+    "title": "欧盟通用数据保护条例",
+    "titleEn": "General Data Protection Regulation (EU) 2016/679",
+    "jurisdiction": "欧盟",
+    "topic": "数据合规",
+    "effectiveDate": "2018-05-25",
+    "summary": "确立合法性基础、数据主体权利、数据保护官、跨境传输与高额罚款（最高2000万欧元或全球营业额4%）等规则，并具有域外效力。中国企业向欧盟提供商品或服务、或监测欧盟境内个人行为时即可能适用。",
+    "summaryEn": "Establishes lawful bases, data subject rights, DPO, transfer rules and heavy fines (up to EUR 20 million or 4% of global turnover), with extraterritorial scope.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2016/679/oj"
+  },
+  {
+    "id": "eu-ip-eutm",
+    "title": "欧盟商标条例",
+    "titleEn": "EU Trade Mark Regulation (EU) 2017/1001",
+    "jurisdiction": "欧盟",
+    "topic": "知识产权",
+    "effectiveDate": "2018-10-01（主要条款）",
+    "summary": "建立欧盟知识产权局（EUIPO）的统一商标注册制度，一次注册在全部成员国生效，规定绝对与相对驳回理由、异议、撤销与无效程序。中国企业进入欧盟市场应优先考虑欧盟商标，并持续监控近似商标。",
+    "summaryEn": "Creates the EUIPO unitary trademark system, effective in all member states from a single registration, with opposition, revocation and invalidity procedures.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2017/1001/oj"
+  },
+  {
+    "id": "eu-corp-csrd",
+    "title": "欧盟企业可持续发展报告指令",
+    "titleEn": "Corporate Sustainability Reporting Directive (EU) 2022/2464",
+    "jurisdiction": "欧盟",
+    "topic": "公司治理",
+    "effectiveDate": "2024-01-01（首批适用；2023-01-05生效）",
+    "summary": "要求大型企业与上市公司按欧洲可持续报告准则（ESRS）披露环境、社会与治理信息，并逐步覆盖在欧盟有重大业务的非欧盟集团。中国出海企业在欧盟的子公司或分支机构可能被纳入报告范围。",
+    "summaryEn": "Requires large companies and listed firms to report sustainability information under ESRS, gradually extending to non-EU groups with significant EU business.",
+    "source": "https://eur-lex.europa.eu/eli/dir/2022/2464/oj"
+  },
+  {
+    "id": "eu-comp-fsr",
+    "title": "欧盟外国补贴条例",
+    "titleEn": "Foreign Subsidies Regulation (EU) 2022/2560",
+    "jurisdiction": "欧盟",
+    "topic": "合规监管",
+    "effectiveDate": "2023-07-12（申报义务自2023-10-12）",
+    "summary": "授权欧委会审查非欧盟政府向在欧经营企业提供的财政资助，覆盖并购、公共采购投标及依职权调查，即使未达申报门槛也可能被主动调查。中国企业赴欧并购或投标公共采购时，须评估外国补贴申报义务及剥离、返还等救济风险。",
+    "summaryEn": "Empowers the Commission to review foreign financial contributions in EU mergers, public procurement and ex officio investigations, with remedies such as divestment or repayment.",
+    "source": "https://eur-lex.europa.eu/eli/reg/2022/2560/oj"
+  }
+]

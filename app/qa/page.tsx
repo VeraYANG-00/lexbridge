@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { Suspense, useEffect, useMemo, useState } from "react";
 import { useSearchParams } from "next/navigation";
-import { QA_CATEGORIES, type QuestionCard } from "@/lib/qa";
+import { QA_CATEGORIES, QA_JURISDICTIONS, type QuestionCard } from "@/lib/qa";
 import { getSupabase } from "@/lib/supabase";
 
 type LoadState =
@@ -21,17 +21,25 @@ function QaContent() {
   const [state, setState] = useState<LoadState>({ status: "loading" });
   const [search, setSearch] = useState("");
   const [category, setCategory] = useState("全部");
+  const [jurisdiction, setJurisdiction] = useState("全部");
+  const [topic, setTopic] = useState("全部");
   const [expanded, setExpanded] = useState<Record<string, boolean>>({});
   const searchParams = useSearchParams();
   const initialQ = searchParams.get("q");
+  const initialCategory = searchParams.get("category");
 
   useEffect(() => {
-    if (!initialQ) return;
     const timer = setTimeout(() => {
-      setSearch(initialQ);
+      if (initialQ) setSearch(initialQ);
+      if (
+        initialCategory &&
+        (QA_CATEGORIES as readonly string[]).includes(initialCategory)
+      ) {
+        setCategory(initialCategory);
+      }
     }, 0);
     return () => clearTimeout(timer);
-  }, [initialQ]);
+  }, [initialQ, initialCategory]);
 
   useEffect(() => {
     let cancelled = false;
@@ -63,19 +71,31 @@ function QaContent() {
     };
   }, []);
 
+  const topics = useMemo(() => {
+    const all = state.status === "success" ? state.cards : [];
+    return Array.from(new Set(all.map((card) => card.topic).filter(Boolean))).sort(
+      (a, b) => a.localeCompare(b, "zh")
+    );
+  }, [state]);
+
   const filtered = useMemo(() => {
     const all = state.status === "success" ? state.cards : [];
     const keyword = search.trim().toLowerCase();
     return all.filter((card) => {
       const matchCategory =
         category === "全部" || card.category === category;
+      const matchJurisdiction =
+        jurisdiction === "全部" || card.jurisdiction === jurisdiction;
+      const matchTopic = topic === "全部" || card.topic === topic;
       const matchKeyword =
         !keyword ||
         card.question.toLowerCase().includes(keyword) ||
-        card.answer.toLowerCase().includes(keyword);
-      return matchCategory && matchKeyword;
+        (card.answer ?? "").toLowerCase().includes(keyword);
+      return (
+        matchCategory && matchJurisdiction && matchTopic && matchKeyword
+      );
     });
-  }, [state, search, category]);
+  }, [state, search, category, jurisdiction, topic]);
 
   function toggleExpanded(id: string) {
     setExpanded((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -127,6 +147,32 @@ function QaContent() {
             </option>
           ))}
         </select>
+        <select
+          value={jurisdiction}
+          onChange={(event) => setJurisdiction(event.target.value)}
+          aria-label="法域"
+          className="h-10 rounded-md border border-gray-300 bg-white px-2 text-sm text-gray-700 outline-none focus:border-primary"
+        >
+          <option value="全部">全部法域</option>
+          {QA_JURISDICTIONS.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
+        <select
+          value={topic}
+          onChange={(event) => setTopic(event.target.value)}
+          aria-label="主题"
+          className="h-10 rounded-md border border-gray-300 bg-white px-2 text-sm text-gray-700 outline-none focus:border-primary"
+        >
+          <option value="全部">全部主题</option>
+          {topics.map((item) => (
+            <option key={item} value={item}>
+              {item}
+            </option>
+          ))}
+        </select>
       </div>
 
       {state.status === "loading" && (
@@ -160,16 +206,14 @@ function QaContent() {
       )}
 
       {state.status === "success" &&
-        state.cards.length > 0 &&
-        (filtered.length === 0 ? (
-          <p className="rounded-lg border border-gray-200 px-4 py-10 text-center text-sm text-gray-400">
-            没有匹配的卡片，试试更换关键词或分类。
-          </p>
-        ) : (
-          <div className="flex flex-col gap-4">
-            <p className="text-sm text-gray-500">
-              共 {filtered.length} 张卡片
+        state.cards.length > 0 && (
+        <div className="flex flex-col gap-4">
+          <p className="text-sm text-gray-500">共 {filtered.length} 条问题</p>
+          {filtered.length === 0 ? (
+            <p className="rounded-lg border border-gray-200 px-4 py-10 text-center text-sm text-gray-400">
+              没有匹配的卡片，试试更换关键词或筛选条件。
             </p>
+          ) : (
             <ul className="grid gap-3 sm:grid-cols-2">
               {filtered.map((card) => {
                 const isOpen = Boolean(expanded[card.id]);
@@ -180,6 +224,11 @@ function QaContent() {
                         <span className="rounded-full bg-primary/5 px-2 py-0.5 text-xs text-primary">
                           {card.category}
                         </span>
+                        {card.jurisdiction && (
+                          <span className="rounded-full bg-gray-100 px-2 py-0.5 text-xs text-gray-600">
+                            {card.jurisdiction}
+                          </span>
+                        )}
                         {card.tags && card.tags.length > 0 && (
                           <span className="flex flex-wrap justify-end gap-1">
                             {card.tags.map((tag) => (
@@ -224,11 +273,16 @@ function QaContent() {
                         </span>
                       </button>
 
-                      {isOpen && (
-                        <p className="mt-2 whitespace-pre-line text-sm leading-6 text-gray-600">
-                          {card.answer}
-                        </p>
-                      )}
+                      {isOpen &&
+                        (card.answer ? (
+                          <p className="mt-2 whitespace-pre-line text-sm leading-6 text-gray-600">
+                            {card.answer}
+                          </p>
+                        ) : (
+                          <p className="mt-2 rounded-md bg-gray-50 px-3 py-2 text-sm text-gray-400">
+                            待解答，欢迎补充
+                          </p>
+                        ))}
 
                       <p className="mt-auto pt-3 text-xs text-gray-400">
                         {[card.source, formatTime(card.created_at)]
@@ -240,8 +294,9 @@ function QaContent() {
                 );
               })}
             </ul>
-          </div>
-        ))}
+          )}
+        </div>
+      )}
     </div>
   );
 }

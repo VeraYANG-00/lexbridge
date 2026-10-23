@@ -2,17 +2,20 @@
 
 import Link from "next/link";
 import { useState } from "react";
-import { QA_CATEGORIES } from "@/lib/qa";
+import { QA_CATEGORIES, QA_JURISDICTIONS } from "@/lib/qa";
 import { getSupabase } from "@/lib/supabase";
 
 type FieldErrors = {
   category?: string;
+  jurisdiction?: string;
+  topic?: string;
   question?: string;
-  answer?: string;
 };
 
 export default function UploadQaPage() {
   const [category, setCategory] = useState("");
+  const [jurisdiction, setJurisdiction] = useState("");
+  const [topic, setTopic] = useState("");
   const [question, setQuestion] = useState("");
   const [answer, setAnswer] = useState("");
   const [tagsInput, setTagsInput] = useState("");
@@ -36,8 +39,9 @@ export default function UploadQaPage() {
 
     const nextErrors: FieldErrors = {};
     if (!category) nextErrors.category = "请选择分类";
+    if (!jurisdiction) nextErrors.jurisdiction = "请选择法域";
+    if (!topic.trim()) nextErrors.topic = "请填写主题";
     if (!question.trim()) nextErrors.question = "请填写问题";
-    if (!answer.trim()) nextErrors.answer = "请填写答案";
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
       setSuccess(false);
@@ -57,8 +61,10 @@ export default function UploadQaPage() {
       const { error } = await getSupabase().from("questions").insert({
         id: crypto.randomUUID(),
         category,
+        jurisdiction,
+        topic: topic.trim(),
         question: question.trim(),
-        answer: answer.trim(),
+        answer: answer.trim() || null,
         tags,
         source: source.trim() || null,
       });
@@ -66,6 +72,8 @@ export default function UploadQaPage() {
 
       setSuccess(true);
       setCategory("");
+      setJurisdiction("");
+      setTopic("");
       setQuestion("");
       setAnswer("");
       setTagsInput("");
@@ -143,6 +151,44 @@ export default function UploadQaPage() {
         </div>
 
         <div>
+          <label htmlFor="qa-jurisdiction" className="text-sm font-medium text-gray-900">
+            法域 *
+          </label>
+          <select
+            id="qa-jurisdiction"
+            value={jurisdiction}
+            onChange={(event) => setJurisdiction(event.target.value)}
+            className={"mt-1.5 h-10 rounded-md border bg-white px-2 text-sm " + (errors.jurisdiction ? "border-red-300" : "border-gray-300")}
+          >
+            <option value="">请选择法域</option>
+            {QA_JURISDICTIONS.map((item) => (
+              <option key={item} value={item}>
+                {item}
+              </option>
+            ))}
+          </select>
+          {errors.jurisdiction && (
+            <p className="mt-1 text-xs text-red-600">{errors.jurisdiction}</p>
+          )}
+        </div>
+
+        <div>
+          <label htmlFor="qa-topic" className="text-sm font-medium text-gray-900">
+            主题 *
+          </label>
+          <input
+            id="qa-topic"
+            value={topic}
+            onChange={(event) => setTopic(event.target.value)}
+            placeholder="如：公司设立与实体选择"
+            className={fieldClass(Boolean(errors.topic))}
+          />
+          {errors.topic && (
+            <p className="mt-1 text-xs text-red-600">{errors.topic}</p>
+          )}
+        </div>
+
+        <div>
           <label htmlFor="qa-question" className="text-sm font-medium text-gray-900">
             问题 *
           </label>
@@ -160,19 +206,19 @@ export default function UploadQaPage() {
 
         <div>
           <label htmlFor="qa-answer" className="text-sm font-medium text-gray-900">
-            答案 *
+            答案
           </label>
           <textarea
             id="qa-answer"
             value={answer}
             onChange={(event) => setAnswer(event.target.value)}
             rows={6}
-            placeholder="展开说明你的答案，支持换行"
-            className={fieldClass(Boolean(errors.answer))}
+            placeholder="选填：展开说明你的答案，支持换行；留空则显示为待解答"
+            className={fieldClass(false)}
           />
-          {errors.answer && (
-            <p className="mt-1 text-xs text-red-600">{errors.answer}</p>
-          )}
+          <p className="mt-1 text-xs text-gray-400">
+            可不填，留空表示该问题待解答。
+          </p>
         </div>
 
         <div>
